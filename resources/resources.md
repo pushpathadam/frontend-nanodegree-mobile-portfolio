@@ -11,7 +11,7 @@ print.css 203ms
 
 
 https://developers.google.com/products/
-https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/webfont-optimization?hl=en
+https://developers.google.com/web/fundamentals/performance/?hl=en
 https://developers.google.com/fonts/docs/getting_started
 
 
@@ -46,6 +46,20 @@ body {
     to   { opacity: 1; }
 }
 
+Github Pages
+https://pages.github.com
+
+Book
+High Performance Browser Networking
+by Ilya Grigorik
+http://chimera.labs.oreilly.com/books/1230000000545
+
+# CSS triggers
+csstriggers.com
+
+Video
+https://speakerdeck.com/paullewis/making-a-silky-smooth-web
+
 # Part 2
 Gulp vs Grunt ..awesome workflows
 http://www.smashingmagazine.com/2014/06/11/building-with-gulp/
@@ -53,3 +67,6 @@ http://stackoverflow.com/questions/26273358/gulp-minify-all-css-files-to-a-singl
 
 Guide
 https://github.com/JohnUdacity/grunt-workflow-guide
+
+
+https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/optimize-encoding-and-transfer#minification-preprocessing--context-specific-optimizations
