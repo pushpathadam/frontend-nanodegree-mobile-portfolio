@@ -526,17 +526,17 @@ function updatePositions() {
     var items = document.getElementsByClassName('mover');
 
     // pull variables out of the loop this reduces time from  19.4ms  to 0.49ms
-    var scrollTop = document.body.scrollTop/1250;
+    var scrollTop = document.body.scrollTop;
     var itemsArray = Array.prototype.slice.apply(items);
+
     var phaseSteps = [];
     for (var i =0; i < 5; i++){
-        phaseSteps.push(100*(Math.sin((scrollTop) + (i % 5))));
+        phaseSteps.push(100*(Math.sin((scrollTop/1250) + (i % 5))));
     }
 
     // extract basicLeft Attribute in one go
     var itemsArrayBasicLeft = itemsArray.map(function(a) {return a.basicLeft});
-
-// Old
+/* Old
 /*
     for (var i = 0; i < items.length; i++) {
         //var phase = Math.sin((document.body.scrollTop / 1250) + (i % 5));
@@ -544,9 +544,11 @@ function updatePositions() {
         items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
     }
 */
-    // use array method instead of for loop, moved some calulations out of the loop
+    // use array method instead of for loop, moved most calculations out of the loop
     itemsArray.forEach(function(elem,index,arr){
         elem.style.left = itemsArrayBasicLeft[index]  + phaseSteps[index%5] + 'px';
+        //var txString = itemsArrayBasicLeft[index]  + phaseSteps[index%5] + 'px';
+        //elem.style.transform = 'translateX(' + txString + ')';
     });
 
   // User Timing API to the rescue again. Seriously, it's worth learning.
@@ -569,8 +571,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Reduce to 50 pizzas
     //for (var i = 0; i < 200; i++) {
-    for (var i = 0; i < 50; i++) {
 
+    for (var i = 0; i < 50; i++) {
         var elem = document.createElement('img');
         elem.className = 'mover';
         elem.src = "images/pizza-sm.png";
@@ -578,8 +580,10 @@ document.addEventListener('DOMContentLoaded', function() {
         // need to fix container
         elem.style.height = "100px";
         elem.style.width = "73.333px";
+
         elem.basicLeft = (i % cols) * s;
         elem.style.top = (Math.floor(i / cols) * s) + 'px';
+
         // faster selector
         //document.querySelector("#movingPizzas1").appendChild(elem);
         document.getElementById("movingPizzas1").appendChild(elem);
