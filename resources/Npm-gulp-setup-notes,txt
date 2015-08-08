@@ -1,0 +1,68 @@
+sudo npm install npm -g
+npm install --global gulp
+
+
+ls
+  513  npm install --save-dev gulp
+  514  ls
+  515  atom gulpfile.js 
+  516  gulp serve
+  517  node -v
+  518  gulp --v
+  519  npm install --save-dev gulp-load-plugins
+  520  gulp serve
+  521  npm install
+  522  npm install
+  523  gulp serve
+  524  npm install --save-dev gulp-load-plugins
+  525  sudo npm install npm -g
+  526  npm install --global gulp
+  527  npm install --save-dev gulp
+  528  npm install --save-dev gulp-load-plugins
+  529  node -v
+  530  gulp --v
+  531  npm cache clean
+  532  npm install --save-dev gulp-load-plugins
+  533  history
+
+
+Removing homebrew install of npm
+http://stackoverflow.com/questions/11177954/how-do-i-completely-uninstall-node-js-and-reinstall-from-beginning-mac-os-x
+
+To completely uninstall node + npm is to do the following:
+
+go to /usr/local/lib and delete any node and node_modules
+go to /usr/local/include and delete any node and node_modules directory
+if you installed with brew install node, then run brew uninstall node in your terminal
+check your Home directory for any local or lib or include folders, and delete any node or node_modules from there
+go to /usr/local/bin and delete any node executable
+
+
+627  sudo npm install --global gulp
+629  gulp --v
+630  npm install --v
+631  node -v
+
+632  gulp serve
+Ugg!
+
+633  npm install --save-dev gulp
+634  npm install --save-dev gulp-load-plugins 
+635  npm update
+
+643  cd qrcode/
+
+645  npm outdated
+648  rm -r qrcode/
+just to be safe
+
+651  git clone https://github.com/udacity/qrcode.git
+653  cd qrcode/
+655  gulp --v
+
+660  sudo npm update
+661  npm install gulp-update
+662  gulp serve
+664  npm install --save-dev gulp
+665  npm install --save-dev gulp-load-plugins
+

@@ -70,3 +70,8 @@ https://github.com/JohnUdacity/grunt-workflow-guide
 
 
 https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/optimize-encoding-and-transfer#minification-preprocessing--context-specific-optimizations
+
+Issues with Gulp.
+Uninstall node that came with homebrew
+Install node from node.js site installer.
+run all global npm commands with sudo
