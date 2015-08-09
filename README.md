@@ -64,7 +64,7 @@ var randomPizzasLength = randomPizzas.length;
 
 Reduced Number of floating pizzas from 200 to 50
 Removed most calculations out of the loop that recalcs the background pizzas.
-
+Moved static style calcs to css sheet
 
 ## Website Performance Optimization portfolio project
 

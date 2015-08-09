@@ -31,13 +31,22 @@ form {
 
 .mover {
   position: fixed;
-  width: 256px;
+  //width: 256px;
   z-index: -1;
   /* https://discussions.udacity.com/t/fps-metrics-question/3349/18 */
   backface-visibility: hidden;
+  background:url(../images/pizza-sm.png);
+  //display:inline-block;
+  height:100px;
+  width:73.33px }
 }
 
-
+.bgPizza {
+    background:url(images/pizza-sm.png);
+    display:inline-block;
+    height:100px;
+    width:73.33px;
+}
 .randomPizzaContainer {
   float: left;
   display: flex;

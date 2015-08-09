@@ -546,9 +546,11 @@ function updatePositions() {
 */
     // use array method instead of for loop, moved most calculations out of the loop
     itemsArray.forEach(function(elem,index,arr){
-        elem.style.left = itemsArrayBasicLeft[index]  + phaseSteps[index%5] + 'px';
-        //var txString = itemsArrayBasicLeft[index]  + phaseSteps[index%5] + 'px';
-        //elem.style.transform = 'translateX(' + txString + ')';
+        //elem.style.left = itemsArrayBasicLeft[index]  + phaseSteps[index%5] + 'px';
+        // var txString = ((index % 8) * 256) + itemsArrayBasicLeft[index]  + phaseSteps[index%5] + 'px';
+        var txString = itemsArrayBasicLeft[index]  + phaseSteps[index%5] + 'px';
+
+        elem.style.transform = 'translateX(' + txString + ')';
     });
 
   // User Timing API to the rescue again. Seriously, it's worth learning.
@@ -575,11 +577,11 @@ document.addEventListener('DOMContentLoaded', function() {
     for (var i = 0; i < 50; i++) {
         var elem = document.createElement('img');
         elem.className = 'mover';
-        elem.src = "images/pizza-sm.png";
         // this can use a static smaller pizza
         // need to fix container
-        elem.style.height = "100px";
-        elem.style.width = "73.333px";
+        //elem.src = "images/pizza-sm.png";
+        //elem.style.height = "100px";
+        //elem.style.width = "73.333px";
 
         elem.basicLeft = (i % cols) * s;
         elem.style.top = (Math.floor(i / cols) * s) + 'px';
