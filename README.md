@@ -1,12 +1,21 @@
 # How to Run this site
- Load the project on [Add link here]. This will pull in the build version.
+    Download the repository.
+    In one shell
+
+    Cd into /path/to/your-project-folder/dist.
+     python -m SimpleHTTPServer 8080
+
+
+     In a second shell
+     Cd into /path/to/your-project-folder/dist.
+     ngrok 8080
+
+     Use the local url provided by Ngrok to load the project.
 
 # Part 1 Optimizations for Page Speed Insights
 
 ## fonts & stylesheets load time for minified files
-    opensans 52ms
-    style.css 311ms
-    print.css 203ms
+    opensans 52ms, style.css 311ms, print.css 203ms
     These were moved inline.
 
 ## Image Compression
