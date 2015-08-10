@@ -1,70 +1,52 @@
 # How to Run this site
+ Load the project on [Add link here]. This will pull in the build version.
 
-# Part 1 Optimizations
+# Part 1 Optimizations for Page Speed Insights
 
 ## fonts & stylesheets load time for minified files
-opensans 52ms
-style.css 311ms
-print.css 203ms
+    opensans 52ms
+    style.css 311ms
+    print.css 203ms
+    These were moved inline.
 
 ## Image Compression
     pizzeria 115x75 3kb -> ok for smallest phone, sucks above breakpoint 480px .. manually shrink to 480x360 with progressive compression to 10kb
     profilepic.jpg 70x70 5kb
+    Added a further optimization as part of gulp workflow.
 
 ## Renderblocking Javasript
-    src async analytics.js
-    make it https too
+     Made analytics.js load async &  https too
 
-Issue with inconsistency between renders and PageSpeedInsights preview
-1. google api works but is slower
-2. hardcoded is faster but pulls in a default system font on the preview
+## Issue with inconsistency between renders and PageSpeedInsights preview
+    1. google api works but is slower
+    2. hardcoded is faster but pulls in a default system font on the preview
 
-Internet research:
-false alarm- http://stackoverflow.com/questions/22011139/google-fonts-are-not-rendering-on-google-chrome
-css workaround
-body {
-    -webkit-animation-delay: 0.1s;
-    -webkit-animation-name: fontfix;
-    -webkit-animation-duration: 0.1s;
-    -webkit-animation-iteration-count: 1;
-    -webkit-animation-timing-function: linear;
-}
+    After discussing it in a one one...seems to be a google bug.
 
-@-webkit-keyframes fontfix {
-    from { opacity: 1; }
-    to   { opacity: 1; }
-}
+
 
 # Part 2 Optimizations
 
-speedup scrolling moving repetive calculations out of the loops
-line 538 moved scrollTop out of the loop 19.5 ms to 0.5 ms
+## General
+    1. Replaced querySelectorAll faster selectors like getElementsByClassName or getElementById
 
-// extract basicLeft Attribute in one go
-line var itemsArrayBasicLeft = itemsArray.map(function(a) {return a.basicLeft});
+## Reduce times to Resize Pizzas
+    1. move all the calculations except new width assignment out of the loop
+    2. assignments of common variables used to calculate width are done once outside the loop since all the pizzas are the same
+    3. Extracted basicLeft attribute in one go and stuffed it into an array to use later.
+    4. Reduced phase steps calc to the minimum 5 ie mod 5. Save them into an array too.
+    5. Use css translateX to repo pizzas
 
 
-// replace with supposedly faster  0.55ms to
+## Optimize Update Positions
+    1. Reduced Number of floating pizzas from 200 to 50
+    2. Removed most calculations out of the loop that recalcs the background pizzas.
+    3. Moved static style calcs to css sheet
+    5. speedup scrolling moving static calculations out of the loops
+    5. moved scrollTop out of the loop 19.5 ms to 0.5 ms
 
-var items = document.querySelectorAll('.mover');
-//var items = document.getElementsByClassName('mover');
 
-// improved
-event 0.82ms
-functioncall 0.19ms
-update 0.57ms  .22ms
-
-// moved this calculation out of the loop
-var randomPizzas = document.getElementsByClassName('randomPizzaContainer');
-var randomPizzasLength = randomPizzas.length;
-
-//pizzas are the same size why loop through them at all, moved these out of the loop. Bingo 1.195 ms
-    var dx = determineDx(document.getElementsByClassName("randomPizzaContainer")[0], size);
-    var newwidth = (document.getElementsByClassName("randomPizzaContainer")[0].offsetWidth + dx) + 'px';
-
-Reduced Number of floating pizzas from 200 to 50
-Removed most calculations out of the loop that recalcs the background pizzas.
-Moved static style calcs to css sheet
+# ----------------Original from Udacity Below --------------------------------#
 
 ## Website Performance Optimization portfolio project
 
