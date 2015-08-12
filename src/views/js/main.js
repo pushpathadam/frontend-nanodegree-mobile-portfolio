@@ -460,8 +460,11 @@ var resizePizzas = function(size) {
         var randomPizzasLength = randomPizzas.length;
 
         // all the pizzas are same size why loop through them at all?
-        var dx = determineDx(document.getElementsByClassName("randomPizzaContainer")[0], size);
-        var newwidth = (document.getElementsByClassName("randomPizzaContainer")[0].offsetWidth + dx) + 'px';
+        //var dx = determineDx(document.getElementsByClassName("randomPizzaContainer")[0], size);
+        //var newwidth = (document.getElementsByClassName("randomPizzaContainer")[0].offsetWidth + dx) + 'px';
+        // Reduced DOM calls further
+        var dx = determineDx(randomPizzas[0], size);
+        var newwidth = (randomPizzas[0].offsetWidth + dx) + 'px';
 
         /*
         for (var i = 0; i < document.querySelectorAll(".randomPizzaContainer").length; i++)

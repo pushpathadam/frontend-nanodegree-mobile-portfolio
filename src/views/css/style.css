@@ -31,17 +31,22 @@ form {
 
 .mover {
   position: fixed;
-  //width: 256px;
+  /*width: 256px;*/
   z-index: -1;
   /* https://discussions.udacity.com/t/fps-metrics-question/3349/18 */
+  /* added vendor prefix */
   backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
   background:url(../images/pizza-sm.png);
-  //display:inline-block;
+  /*display:inline-block;*/
   height:100px;
   width:73.33px;
-  //will-change: transform;
-      transform: translateZ(0);
-   transform: translate3d(0,0,0);
+  /*will-change: transform;*/
+  transform: translateZ(0);
+  transform: translate3d(0,0,0);
+  -webkit-transform: translateZ(0);
+  -webkit-transform: translate3d(0,0,0);
+
 
  }
 /*

@@ -19,7 +19,8 @@
     These were moved inline.
 
 ## Image Compression
-    pizzeria 115x75 3kb -> ok for smallest phone, sucks above breakpoint 480px .. manually shrink to 480x360 with progressive compression to 10kb
+    pizzeria 115x75 3kb -> ok for smallest phone, sucks above breakpoint 480px .. manually shrink to 480x360 with progressive compression to 45kb
+    additional compression in gulp-imagemin step to 40kb
     profilepic.jpg 70x70 5kb
     Added a further optimization as part of gulp workflow.
 
