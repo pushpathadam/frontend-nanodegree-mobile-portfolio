@@ -2,6 +2,7 @@ var gulp=require('gulp'),
 	uglify = require('gulp-uglify'),
 	minifyCSS = require('gulp-minify-css'),
 	imagemin = require('gulp-imagemin'),
+	pngquant = require('imagemin-pngquant'),
 	minifyhtml = require('gulp-minify-html');
 
 var paths = {
@@ -31,10 +32,18 @@ gulp.task('minifyCSS', function(){
 
 gulp.task('imagemin', function(){
 	gulp.src(paths.images[0])
-		.pipe(imagemin())
+		.pipe(imagemin({
+            progressive: true,
+            svgoPlugins: [{removeViewBox: false}],
+            use: [pngquant()]
+        }))
 		.pipe(gulp.dest('dist/img/'));
 	gulp.src(paths.images[1])
-		.pipe(imagemin())
+		.pipe(imagemin({
+            progressive: true,
+            svgoPlugins: [{removeViewBox: false}],
+            use: [pngquant()]
+        }))
 		.pipe(gulp.dest('dist/views/images/'));
 });
 
@@ -44,7 +53,7 @@ gulp.task('minifyhtml', function(){
 		.pipe(gulp.dest('dist/'));
 	gulp.src(paths.content[1])
 		.pipe(minifyhtml())
-		.pipe(gulp.dest('dist/'));	
+		.pipe(gulp.dest('dist/'));
 	gulp.src(paths.content[2])
 		.pipe(minifyhtml())
 		.pipe(gulp.dest('dist/'));

@@ -38,18 +38,27 @@ form {
   background:url(../images/pizza-sm.png);
   //display:inline-block;
   height:100px;
-  width:73.33px }
-}
+  width:73.33px;
+  //will-change: transform;
+      transform: translateZ(0);
+   transform: translate3d(0,0,0);
 
+ }
+/*
 .bgPizza {
     background:url(images/pizza-sm.png);
     display:inline-block;
     height:100px;
     width:73.33px;
 }
+*/
 .randomPizzaContainer {
   float: left;
   display: flex;
+}
+
+.movingPizzas1{
+
 }
 
 .randomPizzaContainer:after {

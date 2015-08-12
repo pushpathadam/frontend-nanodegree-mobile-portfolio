@@ -360,42 +360,42 @@ var makeRandomPizza = function() {
 
 // returns a DOM element for each pizza
 var pizzaElementGenerator = function(i) {
-  var pizzaContainer,             // contains pizza title, image and list of ingredients
-      pizzaImageContainer,        // contains the pizza image
-      pizzaImage,                 // the pizza image itself
-      pizzaDescriptionContainer,  // contains the pizza title and list of ingredients
-      pizzaName,                  // the pizza name itself
-      ul;                         // the list of ingredients
+    var pizzaContainer,             // contains pizza title, image and list of ingredients
+        pizzaImageContainer,        // contains the pizza image
+        pizzaImage,                 // the pizza image itself
+        pizzaDescriptionContainer,  // contains the pizza title and list of ingredients
+        pizzaName,                  // the pizza name itself
+        ul;                         // the list of ingredients
 
-  pizzaContainer  = document.createElement("div");
-  pizzaImageContainer = document.createElement("div");
-  pizzaImage = document.createElement("img");
-  pizzaDescriptionContainer = document.createElement("div");
+    pizzaContainer  = document.createElement("div");
+    pizzaImageContainer = document.createElement("div");
+    pizzaImage = document.createElement("img");
+    pizzaDescriptionContainer = document.createElement("div");
 
-  pizzaContainer.classList.add("randomPizzaContainer");
-  pizzaContainer.style.width = "33.33%";
-  pizzaContainer.style.height = "325px";
-  pizzaContainer.id = "pizza" + i;                // gives each pizza element a unique id
-  pizzaImageContainer.classList.add("col-md-6");
+    pizzaContainer.classList.add("randomPizzaContainer");
+    pizzaContainer.style.width = "33.33%";
+    pizzaContainer.style.height = "325px";
+    pizzaContainer.id = "pizza" + i;                // gives each pizza element a unique id
+    pizzaImageContainer.classList.add("col-md-6");
 
-  pizzaImage.src = "images/pizza.png";
-  pizzaImage.classList.add("img-responsive");
-  pizzaImageContainer.appendChild(pizzaImage);
-  pizzaContainer.appendChild(pizzaImageContainer);
+    pizzaImage.src = "images/pizza.png";
+    pizzaImage.classList.add("img-responsive");
+    pizzaImageContainer.appendChild(pizzaImage);
+    pizzaContainer.appendChild(pizzaImageContainer);
 
 
-  pizzaDescriptionContainer.classList.add("col-md-6");
+    pizzaDescriptionContainer.classList.add("col-md-6");
 
-  pizzaName = document.createElement("h4");
-  pizzaName.innerHTML = randomName();
-  pizzaDescriptionContainer.appendChild(pizzaName);
+    pizzaName = document.createElement("h4");
+    pizzaName.innerHTML = randomName();
+    pizzaDescriptionContainer.appendChild(pizzaName);
 
-  ul = document.createElement("ul");
-  ul.innerHTML = makeRandomPizza();
-  pizzaDescriptionContainer.appendChild(ul);
-  pizzaContainer.appendChild(pizzaDescriptionContainer);
+    ul = document.createElement("ul");
+    ul.innerHTML = makeRandomPizza();
+    pizzaDescriptionContainer.appendChild(ul);
+    pizzaContainer.appendChild(pizzaDescriptionContainer);
 
-  return pizzaContainer;
+    return pizzaContainer;
 };
 
 // resizePizzas(size) is called when the slider in the "Our Pizzas" section of the website moves.
@@ -426,7 +426,9 @@ var resizePizzas = function(size) {
 
     function determineDx (elem, size) {
         var oldwidth = elem.offsetWidth;
-        var windowwidth = document.querySelector("#randomPizzas").offsetWidth;
+        //var windowwidth = document.querySelector("#randomPizzas").offsetWidth;
+        var windowwidth = document.getElementById("randomPizzas").offsetWidth;
+
         var oldsize = oldwidth / windowwidth;
 
         // TODO: change to 3 sizes? no more xl?
@@ -487,9 +489,11 @@ var resizePizzas = function(size) {
 
 window.performance.mark("mark_start_generating"); // collect timing data
 
+// moved declaration outside loop since it pulls in all the pizzas at once.
+var pizzasDiv = document.getElementById("randomPizzas");
+
 // This for-loop actually creates and appends all of the pizzas when the page loads
 for (var i = 2; i <100; i++) {
-  var pizzasDiv = document.getElementById("randomPizzas");
   pizzasDiv.appendChild(pizzaElementGenerator(i));
 }
 
@@ -528,28 +532,24 @@ function updatePositions() {
     // pull variables out of the loop this reduces time from  19.4ms  to 0.49ms
     var scrollTop = document.body.scrollTop;
     var itemsArray = Array.prototype.slice.apply(items);
-
     var phaseSteps = [];
+
     for (var i =0; i < 5; i++){
         phaseSteps.push(100*(Math.sin((scrollTop/1250) + (i % 5))));
     }
 
     // extract basicLeft Attribute in one go
     var itemsArrayBasicLeft = itemsArray.map(function(a) {return a.basicLeft});
-/* Old
-/*
-    for (var i = 0; i < items.length; i++) {
-        //var phase = Math.sin((document.body.scrollTop / 1250) + (i % 5));
-        var phase = Math.sin((scrollTop / 1250) + (i % 5));
-        items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
-    }
-*/
+    //moved declaration outside loop
+    var txString;
+
     // use array method instead of for loop, moved most calculations out of the loop
     itemsArray.forEach(function(elem,index,arr){
-        //elem.style.left = itemsArrayBasicLeft[index]  + phaseSteps[index%5] + 'px';
+        // elem.style.left = itemsArrayBasicLeft[index]  + phaseSteps[index%5] + 'px';
         // var txString = ((index % 8) * 256) + itemsArrayBasicLeft[index]  + phaseSteps[index%5] + 'px';
-        var txString = itemsArrayBasicLeft[index]  + phaseSteps[index%5] + 'px';
-
+        // var txString = itemsArrayBasicLeft[index]  + phaseSteps[index%5] + 'px';
+        // Removed itemsArrayBasicLeft, it was leaving part of screen bare
+        txString = phaseSteps[index%5] + 'px';
         elem.style.transform = 'translateX(' + txString + ')';
     });
 
@@ -574,16 +574,14 @@ document.addEventListener('DOMContentLoaded', function() {
     // Reduce to 50 pizzas
     //for (var i = 0; i < 200; i++) {
 
-    for (var i = 0; i < 50; i++) {
+    for (var i = 0; i < 35; i++) {
         var elem = document.createElement('img');
         elem.className = 'mover';
         // this can use a static smaller pizza
-        // need to fix container
-        //elem.src = "images/pizza-sm.png";
-        //elem.style.height = "100px";
-        //elem.style.width = "73.333px";
 
-        elem.basicLeft = (i % cols) * s;
+        // Corrected pizza layout
+        //elem.basicLeft = (i % cols) * s;
+        elem.style.left = (i % cols) * s + 'px';
         elem.style.top = (Math.floor(i / cols) * s) + 'px';
 
         // faster selector
